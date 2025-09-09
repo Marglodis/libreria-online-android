@@ -1,22 +1,25 @@
 package com.abpro_ae4.libreriaonlineapp.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.abpro_ae4.libreriaonlineapp.DetalleLibroActivity;
 import com.abpro_ae4.libreriaonlineapp.R;
 import com.abpro_ae4.libreriaonlineapp.models.Libro;
 
 import java.util.List;
 
 public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHolder>{
-    private List<Libro> listaLibros;
+    private static List<Libro> listaLibros;
 
     public LibroAdapter(List<Libro> listaLibros) {
         this.listaLibros = listaLibros;
@@ -60,8 +63,22 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
             tvTitulo.setText(libro.getTitulo());
             tvDescripcion.setText(libro.getDescripcion());
 
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Libro libroSeleccionado = listaLibros.get(position);
+                    // Crear Intent para navegar a DetalleLibroActivity
+                    Intent intent = new Intent(itemView.getContext(), DetalleLibroActivity.class);
+                    intent.putExtra("TITULO", libroSeleccionado.getTitulo());
+                    intent.putExtra("DESCRIPCION", libroSeleccionado.getDescripcion());
+                    intent.putExtra("IMAGEN_ID", libroSeleccionado.getImagenResorceId());
+                    itemView.getContext().startActivity(intent);
+                }
+            });
+
             btnAgregar.setOnClickListener(v-> {
                 // TODO: Lógica para agregar al carrito
+                Toast.makeText(v.getContext(), "¡" + libro.getTitulo() + " agregado!", Toast.LENGTH_SHORT).show();
             });
         }
     }
