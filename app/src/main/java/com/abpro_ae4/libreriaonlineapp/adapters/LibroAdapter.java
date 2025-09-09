@@ -44,7 +44,7 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
         return listaLibros.size();
     }
     // View Interno (Patrón ViewHolder)
-    static class LibroViewHolder extends RecyclerView.ViewHolder {
+    class LibroViewHolder extends RecyclerView.ViewHolder {
         private ImageView ivPortada;
         private TextView tvTitulo;
         private TextView tvDescripcion;
@@ -59,7 +59,7 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
         }
 
         public void bind(Libro libro) {
-            ivPortada.setImageResource(libro.getImagenResorceId());
+            ivPortada.setImageResource(libro.getImagenResourceId());
             tvTitulo.setText(libro.getTitulo());
             tvDescripcion.setText(libro.getDescripcion());
 
@@ -71,13 +71,19 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
                     Intent intent = new Intent(itemView.getContext(), DetalleLibroActivity.class);
                     intent.putExtra("TITULO", libroSeleccionado.getTitulo());
                     intent.putExtra("DESCRIPCION", libroSeleccionado.getDescripcion());
-                    intent.putExtra("IMAGEN_ID", libroSeleccionado.getImagenResorceId());
+                    intent.putExtra("IMAGEN_ID", libroSeleccionado.getImagenResourceId());
                     itemView.getContext().startActivity(intent);
                 }
             });
 
             btnAgregar.setOnClickListener(v-> {
-                // TODO: Lógica para agregar al carrito
+                //Agrega el lirbor al carrito
+                libro.agregarAlCarrito();
+
+                //Notifica al adaptadorqu el item ah cambiado
+                notifyItemChanged(getAdapterPosition());
+
+                // Feedback al usuario
                 Toast.makeText(v.getContext(), "¡" + libro.getTitulo() + " agregado!", Toast.LENGTH_SHORT).show();
             });
         }
