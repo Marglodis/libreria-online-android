@@ -19,11 +19,18 @@ Esta aplicación es un prototipo de una librería online para Android. Permite a
 5.  Haz clic en el botón "Run" (▶️).
 
 ## Capturas de Pantalla
-![Pantalla Principal](screenshots/main_screen.png)
-![Pantalla de Detalle](screenshots/book_detail_screen.png)
-![Pantalla de Carrito](screenshots/cart_screen.png)]
-![Pantalla Agregar al Carrito](screenshots/added_cart_screen.png)]
-![Pantalla Finalizar Compra](screenshots/finish_purchase_screen.png)
+
+<p float="left">
+  <img src="screenshots/main_screen.png" alt="Pantalla Principal" width="200"/>
+  <img src="screenshots/book_detail_screen.png" alt="Pantalla de Detalle" width="200"/>
+  <img src="screenshots/cart_screen.png" alt="Pantalla de Carrito" width="200"/>
+</p>
+
+<p float="left">
+  <img src="screenshots/added_cart_screen.png" alt="Pantalla Agregar al Carrito" width="200"/>
+  <img src="screenshots/finish_purchase_screen.png" alt="Pantalla Finalizar Compra" width="200"/>
+</p>
+
 
 ## Decisiones de Desarrollo
 - Se eligió **Java** por ser el lenguaje solicitado.
