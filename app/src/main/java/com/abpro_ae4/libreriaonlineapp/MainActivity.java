@@ -10,6 +10,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -71,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         //Obtener el ite, del carrito
-        MenuItem itemCarrito = menu.findItem(R.id.action_carrito);
+   //     MenuItem itemCarrito = menu.findItem(R.id.action_carrito);
+       /* View view = itemCarrito.getActionView();
 
         //Calcular total de articulos
         int totalArticulos = 0;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             builder.append(spannableString);
 
             itemCarrito.setTitle(builder);
-        }
+        }*/
         return true;
     }
 

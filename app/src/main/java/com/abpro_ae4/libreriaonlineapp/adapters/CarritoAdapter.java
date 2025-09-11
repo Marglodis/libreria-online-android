@@ -82,26 +82,29 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
             tvCantidad.setText("Cantidad: " + libro.getCantidadEnCarrito());
             tvSubtotal.setText("Subtotal: " + formatoMoneda.format(libro.calcularSubtotal()));
 
-            btnQuitar.setOnClickListener(v-> {
+            btnQuitar.setOnClickListener(v -> {
                 libro.eliminarDelCarrito();
 
                 int position = getAdapterPosition();
-                if(position != RecyclerView.NO_POSITION) {
-                    if(libro.getCantidadEnCarrito() == 0) {
-                    // Si la cantidD ES 0, LA QUITAMOS DE LA LISTA DEL CARRITO
+                if (position != RecyclerView.NO_POSITION) {
+                    if (libro.getCantidadEnCarrito() == 0) {
+                        // Si la cantidad es 0, lo quitamos de la lista
                         listaCarrito.remove(position);
                         notifyItemRemoved(position);
+                    } else {
+                        // Si aún tiene cantidad, actualizamos el item
+                        notifyItemChanged(position);
                     }
-                } else {
-                    // Si aun titne cantidad, actualziamos el item
-                    notifyItemChanged(getAdapterPosition());
                 }
 
-                // NOtificar al Activity para que actualice el resumen
-                if(itemView.getContext() instanceof CarritoAdapter.OnCarritoUpdatedListener) {
-                    ((CarritoAdapter.OnCarritoUpdatedListener) itemView.getContext()).onCarritoUpdated();
+                // Notificar al Activity para que actualice el resumen
+                if (listener != null) {
+                    listener.onCarritoUpdated();
                 }
-                Toast.makeText(itemView.getContext(), "¡" + libro.getTitulo() + " quitado!", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(itemView.getContext(),
+                        "¡" + libro.getTitulo() + " eliminado del carrito!",
+                        Toast.LENGTH_SHORT).show();
             });
         }
     }
