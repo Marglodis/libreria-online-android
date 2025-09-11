@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -76,7 +77,7 @@ public class CarritoActivity extends AppCompatActivity implements CarritoAdapter
                 // TODO: Aquí iría la lógica para procesar la compra
                 Toast.makeText(this, "¡Compra finalizada! Gracias por tu pedido.", Toast.LENGTH_LONG).show();
                 // Opcional: Limpiar el carrito después de la compra
-                // limpiarCarrito();
+                 limpiarCarrito();
             }
         });
     }
@@ -113,11 +114,10 @@ public class CarritoActivity extends AppCompatActivity implements CarritoAdapter
      * (Opcional) Método para limpiar completamente el carrito.
      * Útil si se implementa la finalización de compra.
      */
+    @SuppressLint("NotifyDataSetChanged")
     private void limpiarCarrito() {
         for (Libro libro : listaCompletaLibros) {
-            libro.eliminarDelCarrito(); // Esto solo reduce la cantidad a 0
-            // Para resetear completamente:
-            // libro.setCantidadEnCarrito(0); // Si tuvieras un setter
+             libro.setCantidadEnCarrito(0);
         }
         listaCarrito.clear();
         adaptador.notifyDataSetChanged();

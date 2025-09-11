@@ -63,4 +63,7 @@ public class Libro {
         }
     }
 
+    public void setCantidadEnCarrito(int i) {
+        this.cantidadEnCarrito = i;
+    }
 }
