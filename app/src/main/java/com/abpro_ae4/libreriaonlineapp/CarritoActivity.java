@@ -1,9 +1,11 @@
 package com.abpro_ae4.libreriaonlineapp;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,11 +29,6 @@ import java.util.Locale;
 public class CarritoActivity extends AppCompatActivity implements CarritoAdapter.OnCarritoUpdatedListener {
 
     ActivityCarritoBinding binding;
-    private RecyclerView rvListaCarrito;
-    private TextView tvTotalArticulos;
-    private TextView tvTotalPrecio;
-    private Button btnFinalizarCompra;
-
     private List<Libro> listaCompletaLibros; // La lista original con todos los libros
     private List<Libro> listaCarrito; // Lista filtrada (solo libros con cantidad > 0)
     private CarritoAdapter adaptador;
@@ -43,13 +40,8 @@ public class CarritoActivity extends AppCompatActivity implements CarritoAdapter
         binding = ActivityCarritoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        rvListaCarrito = binding.rvListaCarrito;
-        tvTotalArticulos = binding.tvTotalArticulos;
-        tvTotalPrecio = binding.tvTotalPrecio;
-        btnFinalizarCompra = binding.btnFinalizarCompra;
-
         // Configurar RecyclerView
-        rvListaCarrito.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvListaCarrito.setLayoutManager(new LinearLayoutManager(this));
 
         // Obtener la lista completa de libros desde MainActivity (solución temporal)
         listaCompletaLibros = MainActivity.obtenerListaLibrosGlobal();
@@ -68,21 +60,29 @@ public class CarritoActivity extends AppCompatActivity implements CarritoAdapter
 
         // Crear y asignar el adaptador, pasando 'this' como listener
         adaptador = new CarritoAdapter(listaCarrito, this);
-        rvListaCarrito.setAdapter(adaptador);
+        binding.rvListaCarrito.setAdapter(adaptador);
 
         // Actualizar el resumen inicial (total de artículos y precio)
         actualizarResumen();
 
         // Configurar el botón de finalizar compra
-        btnFinalizarCompra.setOnClickListener(v -> {
-            if (listaCarrito.isEmpty()) {
-                Toast.makeText(this, "Tu carrito está vacío.", Toast.LENGTH_SHORT).show();
-            } else {
-                // TODO: Aquí iría la lógica para procesar la compra
+        binding.btnFinalizarCompra.setOnClickListener(v -> {
+
                 Toast.makeText(this, "¡Compra finalizada! Gracias por tu pedido.", Toast.LENGTH_LONG).show();
-                // Opcional: Limpiar el carrito después de la compra
+
                  limpiarCarrito();
-            }
+                 new AlertDialog.Builder(this)
+                         .setTitle("¡Compra exitosa!")
+                         .setMessage("Gracias por tu compra. Tu pedido ha sido recibido.")
+                         .setPositiveButton("Aceptar", (dialog, which) -> {
+                             // Volver al MainActivity
+                             Intent intent = new Intent(CarritoActivity.this, MainActivity.class);
+                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                             startActivity(intent);
+                             finish();
+                         })
+                         .setCancelable(false)
+                         .show();
         });
     }
 
@@ -110,30 +110,23 @@ public class CarritoActivity extends AppCompatActivity implements CarritoAdapter
         // Formatear el precio total como moneda
         NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(Locale.US);
 
-        tvTotalArticulos.setText("Total Artículos: " + totalArticulos);
-        tvTotalPrecio.setText("Total: " + formatoMoneda.format(totalPrecio));
+        binding.tvTotalArticulos.setText("Total Artículos: " + totalArticulos);
+        binding.tvTotalPrecio.setText("Total: " + formatoMoneda.format(totalPrecio));
 
         if(listaCarrito.isEmpty()) {
             binding.ivCarritoVacio.setVisibility(View.VISIBLE);
             binding.tvMensajeCarritoVacio.setVisibility(View.VISIBLE);
-            rvListaCarrito.setVisibility(View.GONE);
-            btnFinalizarCompra.setVisibility(View.GONE);
-            tvTotalArticulos.setVisibility(View.GONE);
-            tvTotalPrecio.setVisibility(View.GONE);
+            binding.llResumen.setVisibility(View.GONE);
 
         } else {
             binding.ivCarritoVacio.setVisibility(View.GONE);
             binding.tvMensajeCarritoVacio.setVisibility(View.GONE);
-            rvListaCarrito.setVisibility(View.VISIBLE);
-            btnFinalizarCompra.setVisibility(View.VISIBLE);
-            tvTotalArticulos.setVisibility(View.VISIBLE);
-            tvTotalPrecio.setVisibility(View.VISIBLE);
+            binding.llResumen.setVisibility(View.VISIBLE);
         }
     }
 
     /**
-     * (Opcional) Método para limpiar completamente el carrito.
-     * Útil si se implementa la finalización de compra.
+     * Método para limpiar completamente el carrito.
      */
     @SuppressLint("NotifyDataSetChanged")
     private void limpiarCarrito() {
