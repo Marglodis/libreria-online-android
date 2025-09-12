@@ -33,7 +33,6 @@ Esta aplicación es un prototipo de una librería online para Android. Permite a
 
 
 ### 🔄 Flujo de Interacción con la Aplicación
-Sigue estos pasos para explorar la librería online:
 
 1. **Pantalla Principal: Explora la Colección**
 
@@ -43,9 +42,9 @@ Sigue estos pasos para explorar la librería online:
 
 * Al iniciar la app, el usuario ve una **lista de libros** en tarjetas.
 * Cada tarjeta muestra:
-    * La **portada** del libro (ImageView).
-    * El título y una **breve descripción** (TextView).
-    * Un botón **"Agregar"** (MaterialButton).
+  * La **portada** del libro (ImageView).
+  * El título y una **breve descripción** (TextView).
+  * Un botón **"Agregar"** (MaterialButton).
 * **Interacción**: El usuario puede hacer clic en cualquier tarjeta para ver los **detalles completos** del libro.
 
 2. **Agregar un Libro al Carrito**
@@ -65,12 +64,12 @@ Sigue estos pasos para explorar la librería online:
 
 * Al hacer clic en una tarjeta de libro, el usuario es llevado a la **pantalla de detalles**.
 * Esta pantalla muestra:
-    * Una imagen grande de la **portada**.
-    * El título y la descripción completa del libro.
-    * Un botón grande **"COMPRAR AHORA"**.
+  * Una imagen grande de la **portada**.
+  * El título y la descripción completa del libro.
+  * Un botón grande **"COMPRAR AHORA"**.
 * Interacción:
-    * El usuario puede agregar el libro al carrito desde aquí también. (Por implementar)
-    * Para volver a la lista, hace clic en la **flecha** "←" del emulador.
+  * El usuario puede agregar el libro al carrito desde aquí también. (Por implementar)
+  * Para volver a la lista, hace clic en la **flecha** "←" del emulador.
 
 4. **Acceder al Carrito de Compras**
 <p float="left">
@@ -83,17 +82,18 @@ Sigue estos pasos para explorar la librería online:
 5. **Gestionar el Carrito**
 <p float="left">
   <img src="screenshots/cart_screen.png" alt="Pantalla de Carrito" width="200"/>
+  <img src="screenshots/delete_book_screen.png" alt="Pantalla de Carrito" width="200"/>
 </p>
 
 * El usuario ve una **lista de todos los libros agregados**.
 * Para cada libro, se muestra:
-    * Su portada, título y cantidad.
-    * El **subtotal** calculado (precio * cantidad).
-    * Un botón **"Quitar"**.
+  * Su portada, título y cantidad.
+  * El **subtotal** calculado (precio * cantidad).
+  * Un botón **"Quitar"**.
 * Interacción:
-    * Al hacer clic en **"Quitar"**, se reduce la cantidad del libro. Si llega a 0, el libro desaparece de la lista.
-    * En la parte inferior, se muestra un **resumen** con el total de artículos y el precio total.
-    * Un botón **"FINALIZAR COMPRA"** (Muestra un mensaje de confirmación y elimina el listado de libros del carrito).
+  * Al hacer clic en **"Quitar"**, se reduce la cantidad del libro. Si llega a 0, el libro desaparece de la lista.
+  * En la parte inferior, se muestra un **resumen** con el total de artículos y el precio total.
+  * Un botón **"FINALIZAR COMPRA"** (Muestra un mensaje de confirmación y elimina el listado de libros del carrito).
 * Para volver al inicio, el usuario hace clic en la flecha "←".
 
 ## Decisiones de Desarrollo
