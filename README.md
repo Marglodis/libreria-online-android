@@ -23,7 +23,8 @@ Esta aplicación es un prototipo de una librería online para Android. Permite a
 <p float="left">
   <img src="screenshots/main_screen.png" alt="Pantalla Principal" width="200"/>
   <img src="screenshots/book_detail_screen.png" alt="Pantalla de Detalle" width="200"/>
-  <img src="screenshots/cart_screen.png" alt="Pantalla de Carrito" width="200"/>
+  <img src="screenshots/cart_screen.png" alt="Pantalla de Carrito con lista de libros" width="200"/>
+  <img src="screenshots/cart_empty_screen.png" alt="Pantalla de Carrito Vacío" width="200"/>
 </p>
 
 <p float="left">

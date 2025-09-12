@@ -5,11 +5,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abpro_ae4.libreriaonlineapp.adapters.CarritoAdapter;
+import com.abpro_ae4.libreriaonlineapp.databinding.ActivityCarritoBinding;
 import com.abpro_ae4.libreriaonlineapp.models.Libro;
 
 import java.math.BigDecimal;
@@ -24,6 +26,7 @@ import java.util.Locale;
  */
 public class CarritoActivity extends AppCompatActivity implements CarritoAdapter.OnCarritoUpdatedListener {
 
+    ActivityCarritoBinding binding;
     private RecyclerView rvListaCarrito;
     private TextView tvTotalArticulos;
     private TextView tvTotalPrecio;
@@ -36,13 +39,14 @@ public class CarritoActivity extends AppCompatActivity implements CarritoAdapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_carrito);
 
-        // Inicializar vistas
-        rvListaCarrito = findViewById(R.id.rvListaCarrito);
-        tvTotalArticulos = findViewById(R.id.tvTotalArticulos);
-        tvTotalPrecio = findViewById(R.id.tvTotalPrecio);
-        btnFinalizarCompra = findViewById(R.id.btnFinalizarCompra);
+        binding = ActivityCarritoBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        rvListaCarrito = binding.rvListaCarrito;
+        tvTotalArticulos = binding.tvTotalArticulos;
+        tvTotalPrecio = binding.tvTotalPrecio;
+        btnFinalizarCompra = binding.btnFinalizarCompra;
 
         // Configurar RecyclerView
         rvListaCarrito.setLayoutManager(new LinearLayoutManager(this));
@@ -108,6 +112,23 @@ public class CarritoActivity extends AppCompatActivity implements CarritoAdapter
 
         tvTotalArticulos.setText("Total Artículos: " + totalArticulos);
         tvTotalPrecio.setText("Total: " + formatoMoneda.format(totalPrecio));
+
+        if(listaCarrito.isEmpty()) {
+            binding.ivCarritoVacio.setVisibility(View.VISIBLE);
+            binding.tvMensajeCarritoVacio.setVisibility(View.VISIBLE);
+            rvListaCarrito.setVisibility(View.GONE);
+            btnFinalizarCompra.setVisibility(View.GONE);
+            tvTotalArticulos.setVisibility(View.GONE);
+            tvTotalPrecio.setVisibility(View.GONE);
+
+        } else {
+            binding.ivCarritoVacio.setVisibility(View.GONE);
+            binding.tvMensajeCarritoVacio.setVisibility(View.GONE);
+            rvListaCarrito.setVisibility(View.VISIBLE);
+            btnFinalizarCompra.setVisibility(View.VISIBLE);
+            tvTotalArticulos.setVisibility(View.VISIBLE);
+            tvTotalPrecio.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
