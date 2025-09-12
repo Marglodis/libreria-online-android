@@ -22,7 +22,7 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
     private static List<Libro> listaLibros;
 
     public LibroAdapter(List<Libro> listaLibros) {
-        this.listaLibros = listaLibros;
+        LibroAdapter.listaLibros = listaLibros;
     }
 
     @NonNull
@@ -45,10 +45,10 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
     }
     // View Interno (Patrón ViewHolder)
     class LibroViewHolder extends RecyclerView.ViewHolder {
-        private ImageView ivPortada;
-        private TextView tvTitulo;
-        private TextView tvDescripcion;
-        private Button btnAgregar;
+        private final ImageView ivPortada;
+        private final TextView tvTitulo;
+        private final TextView tvDescripcion;
+        private final Button btnAgregar;
 
         public LibroViewHolder(@NonNull View itemView) {
             super(itemView);

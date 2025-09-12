@@ -21,7 +21,7 @@ import java.util.Locale;
 
 public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoViewHolder> {
     private static List<Libro> listaCarrito;
-    private OnCarritoUpdatedListener listener;
+    private final OnCarritoUpdatedListener listener;
 
     // Interfaz para comunicación con la Activity
     public interface OnCarritoUpdatedListener {
@@ -30,7 +30,7 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
 
     //COnstructor
     public CarritoAdapter(List<Libro> listaCarrito, OnCarritoUpdatedListener listener) {
-        this.listaCarrito = listaCarrito;
+        CarritoAdapter.listaCarrito = listaCarrito;
         this.listener = listener;
     }
 
@@ -56,11 +56,11 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
     }
 
     class CarritoViewHolder extends RecyclerView.ViewHolder{
-        private ImageView ivPortada;
-        private TextView tvTitulo;
-        private TextView tvCantidad;
-        private TextView tvSubtotal;
-        private Button btnQuitar;
+        private final ImageView ivPortada;
+        private final TextView tvTitulo;
+        private final TextView tvCantidad;
+        private final TextView tvSubtotal;
+        private final Button btnQuitar;
 
         public CarritoViewHolder(@NonNull View itemView) {
             super(itemView);
