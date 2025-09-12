@@ -21,6 +21,15 @@ public class DetalleLibroActivity extends AppCompatActivity {
         ActivityDetalleLibroBinding binding = ActivityDetalleLibroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Configurar la Toolbar
+        setSupportActionBar(binding.toolbar);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Detalle del libro");
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            binding.toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        }
+
         // Obtener datos del Intent
         String titulo = getIntent().getStringExtra("TITULO");
         String descripcion = getIntent().getStringExtra("DESCRIPCION");

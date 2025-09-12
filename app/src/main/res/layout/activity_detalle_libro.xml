@@ -9,10 +9,9 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:title="Detalle del libro"
-        android:titleTextColor="@android:color/white"
         />
 
     <ScrollView
