@@ -40,6 +40,15 @@ public class CarritoActivity extends AppCompatActivity implements CarritoAdapter
         binding = ActivityCarritoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //COnfigurar ña Toolbar
+        setSupportActionBar(binding.toolbar);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Carrito de compras");
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            binding.toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        }
+
         // Configurar RecyclerView
         binding.rvListaCarrito.setLayoutManager(new LinearLayoutManager(this));
 
